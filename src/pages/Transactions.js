@@ -1,7 +1,5 @@
 import { Space, Table, Tag } from "antd";
 
-import styles from "./Transactions.module.css";
-
 const columns = [
   {
     title: "User Id",
@@ -87,7 +85,7 @@ const data = [
 export default function Transactions() {
   return (
     <>
-      <div className={styles.tableSpacing}>
+      <div>
         <Table columns={columns} dataSource={data} />
       </div>
     </>
