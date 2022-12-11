@@ -12,7 +12,7 @@ export const getVehicles = async () => {
   });
 };
 
-export const createVehicle = async (vehicleData) => {
+export const addVechicle = async (vehicleData) => {
   return fetch(`${baseUrl}/vehicles`, {
     method: "post",
     headers: {

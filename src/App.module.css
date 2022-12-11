@@ -9,3 +9,7 @@
 .footer {
   text-align: center;
 }
+
+.contentSpacing {
+  padding: 25px 25px 0px 25px;
+}

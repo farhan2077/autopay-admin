@@ -8,7 +8,7 @@ import styles from "./App.module.css";
 import fixedStyles from "./fixantdstyle.css";
 import Transactions from "./pages/Transactions";
 import Users from "./pages/Users";
-import Vehicles from "./pages/Vehicles";
+import Vehicles from "./pages/vehicles/Vehicles";
 
 const { Header, Sider, Content } = Layout;
 
@@ -38,7 +38,7 @@ function App() {
               </Menu.Item>
             </Menu>
           </Sider>
-          <Content>
+          <Content className={styles.contentSpacing}>
             <Routes>
               <Route path="/" element={<Transactions />} />
               <Route path="/users" element={<Users />} />
