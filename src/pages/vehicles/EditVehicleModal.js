@@ -46,6 +46,7 @@ export default function EditVehicleModal({
   return (
     <div>
       <Modal
+        forceRender
         title="Edit vehicle"
         okText="Save"
         cancelText="Cancel"

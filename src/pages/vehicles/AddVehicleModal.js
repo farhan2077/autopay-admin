@@ -37,6 +37,7 @@ export default function AddVehicleModal({ open, onCreate, onCancel }) {
   return (
     <div>
       <Modal
+        forceRender
         title="Add vehicle"
         okText="Add vehicle"
         cancelText="Cancel"
