@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import { DollarOutlined, UserOutlined, CarOutlined } from "@ant-design/icons";
 
@@ -13,6 +13,7 @@ import Vehicles from "./pages/vehicles/Vehicles";
 const { Header, Sider, Content } = Layout;
 
 function App() {
+  const location = useLocation();
   return (
     <>
       <Layout>
@@ -25,22 +26,22 @@ function App() {
             <Menu
               className={styles.menuSpacing}
               mode="inline"
-              defaultSelectedKeys="Transactions"
+              defaultSelectedKeys={`${location.pathname.substring(1)}`}
             >
-              <Menu.Item key="Transactions" icon={<DollarOutlined />}>
-                <Link to="/">Transactions</Link>
+              <Menu.Item key="transactions" icon={<DollarOutlined />}>
+                <Link to="/transactions">Transactions</Link>
               </Menu.Item>
-              <Menu.Item key="Users" icon={<UserOutlined />}>
+              <Menu.Item key="users" icon={<UserOutlined />}>
                 <Link to="/users">Users</Link>
               </Menu.Item>
-              <Menu.Item key="Vehicles" icon={<CarOutlined />}>
+              <Menu.Item key="vehicles" icon={<CarOutlined />}>
                 <Link to="/vehicles">Vehilces</Link>
               </Menu.Item>
             </Menu>
           </Sider>
           <Content className={styles.contentSpacing}>
             <Routes>
-              <Route path="/" element={<Transactions />} />
+              <Route path="/transactions" element={<Transactions />} />
               <Route path="/users" element={<Users />} />
               <Route path="/vehicles" element={<Vehicles />} />
             </Routes>
