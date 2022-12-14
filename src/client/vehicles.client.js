@@ -12,6 +12,15 @@ export const getVehicles = async () => {
   });
 };
 
+export const getVehicle = async (vehicleId) => {
+  return fetch(`${baseUrl}/vehicles/${vehicleId}`, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 export const addVechicle = async (vehicleData) => {
   return fetch(`${baseUrl}/vehicles`, {
     method: "post",
@@ -19,5 +28,24 @@ export const addVechicle = async (vehicleData) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(vehicleData),
+  });
+};
+
+export const editVehicle = async (vehicleData, vehicleId) => {
+  return fetch(`${baseUrl}/vehicles/${vehicleId}`, {
+    method: "put",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(vehicleData),
+  });
+};
+
+export const deleteVehicle = async (vehicleId) => {
+  return fetch(`${baseUrl}/vehicles/${vehicleId}`, {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 };

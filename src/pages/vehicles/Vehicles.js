@@ -1,47 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Space, Table, Button } from "antd";
+import { Space, Table, Button, message } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import styles from "../pages.module.css";
-import { getVehicles } from "../../client/vehicles.client";
+import { getVehicles, deleteVehicle } from "../../client/vehicles.client";
 import AddVehicleModal from "./AddVehicleModal";
-
-const columns = [
-  {
-    title: "Id",
-    dataIndex: "id",
-    key: "id",
-    ellipsis: true,
-  },
-  {
-    title: "Vehicle Type",
-    dataIndex: "vehicleType",
-    key: "vehicleType",
-    ellipsis: true,
-  },
-  {
-    title: "Toll Rate (BDT)",
-    dataIndex: "tollRate",
-    key: "tollRate",
-    ellipsis: true,
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <Button icon={<EditOutlined />}>Edit</Button>
-        <Button icon={<DeleteOutlined />} type="primary" danger>
-          Delete
-        </Button>
-      </Space>
-    ),
-  },
-];
+import EditVehicleModal from "./EditVehicleModal";
 
 export default function Vehicles() {
   const [vehiclesData, setVehiclesData] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [addVehicleModalOpen, setAddVehicleModalOpen] = useState(false);
+  const [editVehicleModalOpen, setEditAddVehicleModalOpen] = useState(false);
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
 
   function fetchVehicles() {
     getVehicles()
@@ -51,14 +21,81 @@ export default function Vehicles() {
       });
   }
 
-  function onCreate(values) {
-    setModalOpen(false);
+  function onCreateAddVehicleModal() {
     fetchVehicles();
+    setAddVehicleModalOpen(false);
+  }
+
+  function onCreateEditVehicleModal(record) {
+    fetchVehicles();
+    setEditAddVehicleModalOpen(false);
+    setSelectedVehicle(record);
+  }
+
+  function handleDelete(vehicleId) {
+    deleteVehicle(vehicleId)
+      .then((res) => res.json())
+      .then(({ success, message: msg, error: err }) => {
+        if (success) {
+          message.success(msg);
+        } else {
+          message.error(err);
+        }
+      })
+      .then(() => fetchVehicles());
   }
 
   useEffect(() => {
     fetchVehicles();
   }, []);
+
+  const columns = [
+    {
+      title: "Id",
+      dataIndex: "id",
+      key: "id",
+      ellipsis: true,
+    },
+    {
+      title: "Vehicle Type",
+      dataIndex: "vehicleType",
+      key: "vehicleType",
+      ellipsis: true,
+    },
+    {
+      title: "Toll Rate (BDT)",
+      dataIndex: "tollRate",
+      key: "tollRate",
+      ellipsis: true,
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => {
+              onCreateEditVehicleModal(record);
+              setEditAddVehicleModalOpen(true);
+            }}
+          >
+            Edit
+          </Button>
+          <Button
+            icon={<DeleteOutlined />}
+            type="primary"
+            danger
+            onClick={() => {
+              handleDelete(record.id);
+            }}
+          >
+            Delete
+          </Button>
+        </Space>
+      ),
+    },
+  ];
 
   return (
     <div>
@@ -67,17 +104,26 @@ export default function Vehicles() {
         icon={<PlusOutlined />}
         className={styles.buttonBottomSpace}
         onClick={() => {
-          setModalOpen(true);
+          setAddVehicleModalOpen(true);
         }}
       >
         Add new vehicle
       </Button>
 
       <AddVehicleModal
-        open={modalOpen}
-        onCreate={onCreate}
+        open={addVehicleModalOpen}
+        onCreate={onCreateAddVehicleModal}
         onCancel={() => {
-          setModalOpen(false);
+          setAddVehicleModalOpen(false);
+        }}
+      />
+
+      <EditVehicleModal
+        open={editVehicleModalOpen}
+        onCreate={onCreateEditVehicleModal}
+        currentVehicle={selectedVehicle}
+        onCancel={() => {
+          setEditAddVehicleModalOpen(false);
         }}
       />
       <Table
