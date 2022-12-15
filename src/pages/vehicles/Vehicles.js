@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Space, Table, Button, message } from "antd";
+import { Space, Table, Button, message, Tooltip } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import styles from "../pages.module.css";
@@ -45,16 +45,31 @@ export default function Vehicles() {
       .then(() => fetchVehicles());
   }
 
+  const copySuccessfulMessage = () => {
+    message.success("Vehicle Id has been copied to the clipboard", 2);
+  };
+
   useEffect(() => {
     fetchVehicles();
   }, []);
 
   const columns = [
     {
-      title: "Id",
+      title: "Id (Click to copy Id)",
       dataIndex: "id",
       key: "id",
       ellipsis: true,
+      render: (id) => (
+        <Tooltip title="Click to copy vehicle Id">
+          <span
+            onClick={() => {
+              navigator.clipboard.writeText(id).then(copySuccessfulMessage());
+            }}
+          >
+            {id}
+          </span>
+        </Tooltip>
+      ),
     },
     {
       title: "Vehicle Type",
