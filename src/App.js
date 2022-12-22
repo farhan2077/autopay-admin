@@ -6,8 +6,8 @@ import { DollarOutlined, UserOutlined } from "@ant-design/icons";
 import styles from "./App.module.css";
 // eslint-disable-next-line no-unused-vars
 import fixedStyles from "./fixantdstyle.css";
-import Transactions from "./pages/Transactions";
-import Users from "./pages/vehicles/Vehicles";
+import Transactions from "./pages/transactions/Transactions";
+import Users from "./pages/users/Users";
 
 const { Header, Sider, Content } = Layout;
 

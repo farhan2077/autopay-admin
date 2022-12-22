@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Space, Table, Button, message, Tooltip } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-import styles from "../pages.module.css";
+import pageStyle from "../pages.module.css";
 import { getUsers, deleteUser } from "../../client/users.client";
 import AddUserModal from "./AddUserModal";
 import EditUserModal from "./EditUserModal";
@@ -141,7 +141,7 @@ export default function Users() {
       <Button
         type="primary"
         icon={<PlusOutlined />}
-        className={styles.buttonBottomSpace}
+        className={pageStyle.buttonBottomSpace}
         onClick={() => {
           setAddUserModalOpen(true);
         }}
