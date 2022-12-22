@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Tag } from "antd";
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { Table, Tag, Badge } from "antd";
 
 import { getTransactions } from "../../client/transactions.client";
 
@@ -31,7 +30,7 @@ export default function Transactions() {
       },
     },
     {
-      title: "Vehicle id",
+      title: "Vehicle Id",
       dataIndex: "user",
       key: "vehicleId",
       render: (user) => {
@@ -52,16 +51,26 @@ export default function Transactions() {
       render: (paymentStatus) => {
         if (paymentStatus === "paid") {
           return (
-            <Tag icon={<CheckCircleOutlined />} color="#87d068">
-              {paymentStatus}
+            <Tag color="success">
+              <Badge status="success" text={paymentStatus} />
             </Tag>
           );
         } else {
           return (
-            <Tag icon={<CloseCircleOutlined />} color="#f50">
-              {paymentStatus}
+            <Tag color="error">
+              <Badge status="error" text={paymentStatus} />
             </Tag>
           );
+        }
+      },
+    },
+    {
+      title: "Toll rate",
+      dataIndex: "user",
+      key: "tollRate",
+      render: (user) => {
+        if (user) {
+          return <span>{user.tollRate}</span>;
         }
       },
     },
@@ -81,10 +90,17 @@ export default function Transactions() {
     <>
       <div>
         <Table
+          style={{
+            marginBottom: "1.5rem",
+          }}
           rowKey={(record) => record.id}
           columns={columns}
           dataSource={transactionsData}
           bordered
+          pagination={{
+            position: ["bottomCenter"],
+            defaultCurrent: 1,
+          }}
         />
       </div>
     </>

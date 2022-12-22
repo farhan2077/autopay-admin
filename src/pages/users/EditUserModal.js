@@ -57,8 +57,73 @@ export default function EditUserModal({
       >
         <Form form={form} layout="vertical" initialValues={currentUser}>
           <Form.Item
+            name="name"
+            label="Name:"
+            rules={[
+              {
+                required: true,
+                message: "Please enter required field!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="address"
+            label="Address:"
+            rules={[
+              {
+                required: true,
+                message: "Please enter required field!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="phone"
+            label="Phone:"
+            rules={[
+              {
+                required: true,
+                message: "Please enter required field!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="balance"
+            label="Balance:"
+            rules={[
+              {
+                required: true,
+                message: "Please enter required field!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
             name="vehicleType"
-            label="Vehicle type&nbsp;:"
+            label="Vehicle type:"
+            rules={[
+              {
+                required: true,
+                message: "Please enter required field!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="vehicleId"
+            label="Vehicle Id:"
             rules={[
               {
                 required: true,
@@ -71,7 +136,7 @@ export default function EditUserModal({
 
           <Form.Item
             name="tollRate"
-            label="Toll rate&nbsp;:"
+            label="Toll rate:"
             rules={[
               {
                 required: true,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Space, Table, Button, message, Tooltip } from "antd";
+import { Space, Table, Button, message } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import pageStyle from "../pages.module.css";
@@ -32,8 +32,8 @@ export default function Users() {
     setSelecteduser(record);
   }
 
-  function handleDelete(vehicleId) {
-    deleteUser(vehicleId)
+  function handleDelete(userId) {
+    deleteUser(userId)
       .then((res) => res.json())
       .then(({ success, message: msg }) => {
         if (success) {
@@ -45,30 +45,24 @@ export default function Users() {
       .then(() => fetchUsers());
   }
 
-  const copySuccessfulMessage = () => {
-    message.success("Id has been copied to the clipboard", 2);
-  };
-
   useEffect(() => {
     fetchUsers();
   }, []);
 
   const columns = [
     {
-      title: "Id (Click to copy Id)",
+      title: "Id",
       dataIndex: "id",
       key: "id",
       ellipsis: true,
       render: (id) => (
-        <Tooltip title="Click to copy Id">
-          <span
-            onClick={() => {
-              navigator.clipboard.writeText(id).then(copySuccessfulMessage());
-            }}
-          >
-            {id}
-          </span>
-        </Tooltip>
+        <span
+          onClick={() => {
+            navigator.clipboard.writeText(id);
+          }}
+        >
+          {id}
+        </span>
       ),
     },
     {
@@ -100,6 +94,15 @@ export default function Users() {
       dataIndex: "vehicleId",
       key: "vehicleId",
       ellipsis: true,
+      render: (vehicleId) => (
+        <span
+          onClick={() => {
+            navigator.clipboard.writeText(vehicleId);
+          }}
+        >
+          {vehicleId}
+        </span>
+      ),
     },
     {
       title: "Toll Rate (BDT)",
@@ -146,7 +149,7 @@ export default function Users() {
           setAddUserModalOpen(true);
         }}
       >
-        Add new vehicle
+        Add new user
       </Button>
 
       <AddUserModal
@@ -166,17 +169,16 @@ export default function Users() {
         }}
       />
       <Table
+        style={{
+          marginBottom: "1.5rem",
+        }}
         rowKey={(record) => record.id}
         columns={columns}
         dataSource={usersData}
-        size="middle"
         bordered
         pagination={{
           position: ["bottomCenter"],
           defaultCurrent: 1,
-          showTotal: (total, range) => {
-            return `${range[0]} to ${range[1]} of ${total} vehicles`;
-          },
         }}
       />
     </div>

@@ -12,7 +12,7 @@ export const getUsers = async () => {
   });
 };
 
-export const getVehicle = async (userId) => {
+export const getUser = async (userId) => {
   return fetch(`${baseUrl}/users/${userId}`, {
     method: "get",
     headers: {
