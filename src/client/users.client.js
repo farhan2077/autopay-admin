@@ -3,8 +3,8 @@ const baseUrl =
     ? process.env.REACT_APP_DEV_API_URL
     : process.env.REACT_APP_PROD_API_URL;
 
-export const getVehicles = async () => {
-  return fetch(`${baseUrl}/vehicles`, {
+export const getUsers = async () => {
+  return fetch(`${baseUrl}/users`, {
     method: "get",
     headers: {
       "Content-Type": "application/json",
@@ -12,8 +12,8 @@ export const getVehicles = async () => {
   });
 };
 
-export const getVehicle = async (vehicleId) => {
-  return fetch(`${baseUrl}/vehicles/${vehicleId}`, {
+export const getVehicle = async (userId) => {
+  return fetch(`${baseUrl}/users/${userId}`, {
     method: "get",
     headers: {
       "Content-Type": "application/json",
@@ -21,28 +21,28 @@ export const getVehicle = async (vehicleId) => {
   });
 };
 
-export const addVechicle = async (vehicleData) => {
-  return fetch(`${baseUrl}/vehicles`, {
+export const addUser = async (userData) => {
+  return fetch(`${baseUrl}/users`, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(vehicleData),
+    body: JSON.stringify(userData),
   });
 };
 
-export const editVehicle = async (vehicleData, vehicleId) => {
-  return fetch(`${baseUrl}/vehicles/${vehicleId}`, {
+export const editUser = async (userData, userId) => {
+  return fetch(`${baseUrl}/users/${userId}`, {
     method: "put",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(vehicleData),
+    body: JSON.stringify(userData),
   });
 };
 
-export const deleteVehicle = async (vehicleId) => {
-  return fetch(`${baseUrl}/vehicles/${vehicleId}`, {
+export const deleteUser = async (userId) => {
+  return fetch(`${baseUrl}/users/${userId}`, {
     method: "delete",
     headers: {
       "Content-Type": "application/json",

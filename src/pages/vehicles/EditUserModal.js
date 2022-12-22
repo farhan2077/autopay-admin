@@ -1,21 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Form, Input, message } from "antd";
 
-import { addVechicle } from "../../client/vehicles.client";
+import { editUser } from "../../client/users.client";
 
-export default function AddVehicleModal({ open, onCreate, onCancel }) {
+export default function EditUserModal({
+  open,
+  onCreate,
+  onCancel,
+  currentUser,
+}) {
   const [form] = Form.useForm();
 
   const [confirmLoading, setConfirmLoading] = useState(false);
+
+  useEffect(() => {
+    form.resetFields();
+  }, [currentUser, form]);
 
   function handleOk() {
     setConfirmLoading(true);
     form
       .validateFields()
       .then((values) => {
-        addVechicle(values)
+        editUser(values, currentUser.id)
           .then((res) => res.json())
-          .then(({ success, message: msg, error: err }) => {
+          .then(({ success, message: msg }) => {
             if (success) {
               form.resetFields();
               onCreate(values);
@@ -23,7 +32,7 @@ export default function AddVehicleModal({ open, onCreate, onCancel }) {
               message.success(msg);
             } else {
               setConfirmLoading(false);
-              message.error(err);
+              message.error(msg);
             }
           });
       })
@@ -38,15 +47,15 @@ export default function AddVehicleModal({ open, onCreate, onCancel }) {
     <div>
       <Modal
         forceRender
-        title="Add vehicle"
-        okText="Add vehicle"
+        title="Edit user"
+        okText="Save"
         cancelText="Cancel"
         open={open}
         onCancel={onCancel}
         onOk={handleOk}
         confirmLoading={confirmLoading}
       >
-        <Form form={form} layout="vertical">
+        <Form form={form} layout="vertical" initialValues={currentUser}>
           <Form.Item
             name="vehicleType"
             label="Vehicle type&nbsp;:"

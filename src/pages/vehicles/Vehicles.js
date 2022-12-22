@@ -3,54 +3,54 @@ import { Space, Table, Button, message, Tooltip } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import styles from "../pages.module.css";
-import { getVehicles, deleteVehicle } from "../../client/vehicles.client";
-import AddVehicleModal from "./AddVehicleModal";
-import EditVehicleModal from "./EditVehicleModal";
+import { getUsers, deleteUser } from "../../client/users.client";
+import AddUserModal from "./AddUserModal";
+import EditUserModal from "./EditUserModal";
 
-export default function Vehicles() {
-  const [vehiclesData, setVehiclesData] = useState([]);
-  const [addVehicleModalOpen, setAddVehicleModalOpen] = useState(false);
-  const [editVehicleModalOpen, setEditAddVehicleModalOpen] = useState(false);
-  const [selectedVehicle, setSelectedVehicle] = useState(null);
+export default function Users() {
+  const [usersData, setUsersData] = useState([]);
+  const [addUserModalOpen, setAddUserModalOpen] = useState(false);
+  const [editUserModalOpen, setEditUserModalOpen] = useState(false);
+  const [selectedUser, setSelecteduser] = useState(null);
 
-  function fetchVehicles() {
-    getVehicles()
+  function fetchUsers() {
+    getUsers()
       .then((res) => res.json())
       .then(({ data }) => {
-        setVehiclesData(data);
+        setUsersData(data);
       });
   }
 
-  function onCreateAddVehicleModal() {
-    fetchVehicles();
-    setAddVehicleModalOpen(false);
+  function onCreateAddUserModal() {
+    fetchUsers();
+    setAddUserModalOpen(false);
   }
 
-  function onCreateEditVehicleModal(record) {
-    fetchVehicles();
-    setEditAddVehicleModalOpen(false);
-    setSelectedVehicle(record);
+  function onCreateEditUserModal(record) {
+    fetchUsers();
+    setEditUserModalOpen(false);
+    setSelecteduser(record);
   }
 
   function handleDelete(vehicleId) {
-    deleteVehicle(vehicleId)
+    deleteUser(vehicleId)
       .then((res) => res.json())
-      .then(({ success, message: msg, error: err }) => {
+      .then(({ success, message: msg }) => {
         if (success) {
           message.success(msg);
         } else {
-          message.error(err);
+          message.error(msg);
         }
       })
-      .then(() => fetchVehicles());
+      .then(() => fetchUsers());
   }
 
   const copySuccessfulMessage = () => {
-    message.success("Vehicle Id has been copied to the clipboard", 2);
+    message.success("Id has been copied to the clipboard", 2);
   };
 
   useEffect(() => {
-    fetchVehicles();
+    fetchUsers();
   }, []);
 
   const columns = [
@@ -60,7 +60,7 @@ export default function Vehicles() {
       key: "id",
       ellipsis: true,
       render: (id) => (
-        <Tooltip title="Click to copy vehicle Id">
+        <Tooltip title="Click to copy Id">
           <span
             onClick={() => {
               navigator.clipboard.writeText(id).then(copySuccessfulMessage());
@@ -72,9 +72,33 @@ export default function Vehicles() {
       ),
     },
     {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      ellipsis: true,
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+      ellipsis: true,
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+      key: "phone",
+      ellipsis: true,
+    },
+    {
       title: "Vehicle Type",
       dataIndex: "vehicleType",
       key: "vehicleType",
+      ellipsis: true,
+    },
+    {
+      title: "Vehicle Id",
+      dataIndex: "vehicleId",
+      key: "vehicleId",
       ellipsis: true,
     },
     {
@@ -91,8 +115,8 @@ export default function Vehicles() {
           <Button
             icon={<EditOutlined />}
             onClick={() => {
-              onCreateEditVehicleModal(record);
-              setEditAddVehicleModalOpen(true);
+              onCreateEditUserModal(record);
+              setEditUserModalOpen(true);
             }}
           >
             Edit
@@ -119,32 +143,32 @@ export default function Vehicles() {
         icon={<PlusOutlined />}
         className={styles.buttonBottomSpace}
         onClick={() => {
-          setAddVehicleModalOpen(true);
+          setAddUserModalOpen(true);
         }}
       >
         Add new vehicle
       </Button>
 
-      <AddVehicleModal
-        open={addVehicleModalOpen}
-        onCreate={onCreateAddVehicleModal}
+      <AddUserModal
+        open={addUserModalOpen}
+        onCreate={onCreateAddUserModal}
         onCancel={() => {
-          setAddVehicleModalOpen(false);
+          setAddUserModalOpen(false);
         }}
       />
 
-      <EditVehicleModal
-        open={editVehicleModalOpen}
-        onCreate={onCreateEditVehicleModal}
-        currentVehicle={selectedVehicle}
+      <EditUserModal
+        open={editUserModalOpen}
+        onCreate={onCreateEditUserModal}
+        currentUser={selectedUser}
         onCancel={() => {
-          setEditAddVehicleModalOpen(false);
+          setEditUserModalOpen(false);
         }}
       />
       <Table
         rowKey={(record) => record.id}
         columns={columns}
-        dataSource={vehiclesData}
+        dataSource={usersData}
         size="middle"
         bordered
         pagination={{
