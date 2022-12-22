@@ -1,92 +1,91 @@
-import { Space, Table, Tag } from "antd";
+import React, { useEffect, useState } from "react";
+import { Table, Tag } from "antd";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
-const columns = [
-  {
-    title: "User Id",
-    dataIndex: "userId",
-    key: "userId",
-    render: (text) => <p>{text}</p>,
-  },
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <p>{text}</p>,
-  },
-  {
-    title: "Vehicle",
-    dataIndex: "vehicle",
-    key: "vehicle",
-  },
-  {
-    title: "Last payment status",
-    dataIndex: "lastPayment",
-    key: "lastPayment",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-
-          if (tag === "loser") {
-            color = "volcano";
-          }
-
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <p>Invite {record.name}</p>
-        <p>Delete</p>
-      </Space>
-    ),
-  },
-];
-
-const data = [
-  {
-    key: "1",
-    userId: "039284023838403",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-];
+import { getTransactions } from "../../client/transactions.client";
 
 export default function Transactions() {
+  const [transactionsData, setTransactionsData] = useState([]);
+
+  function fetchTransactions() {
+    getTransactions()
+      .then((res) => res.json())
+      .then(({ data }) => {
+        setTransactionsData(data);
+      });
+  }
+
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "user",
+      key: "user",
+      render: (user) => {
+        if (user) {
+          return <span>{user.name}</span>;
+        }
+      },
+    },
+    {
+      title: "Vehicle id",
+      dataIndex: "user",
+      key: "vehicleId",
+      render: (user) => {
+        if (user) {
+          return <span>{user.vehicleId}</span>;
+        }
+      },
+    },
+    {
+      title: "Transaction time",
+      dataIndex: "createdAt",
+      key: "createdAt",
+    },
+    {
+      title: "Payment status",
+      dataIndex: "paymentStatus",
+      key: "paymentStatus",
+      render: (paymentStatus) => {
+        if (paymentStatus === "paid") {
+          return (
+            <Tag icon={<CheckCircleOutlined />} color="#87d068">
+              {paymentStatus}
+            </Tag>
+          );
+        } else {
+          return (
+            <Tag icon={<CloseCircleOutlined />} color="#f50">
+              {paymentStatus}
+            </Tag>
+          );
+        }
+      },
+    },
+    // {
+    //   title: "Action",
+    //   key: "action",
+    //   render: (_, record) => (
+    //     <Space size="middle">
+    //       <p>Invite {record.name}</p>
+    //       <p>Delete</p>
+    //     </Space>
+    //   ),
+    // },
+  ];
+
   return (
     <>
       <div>
-        <Table columns={columns} dataSource={data} />
+        <Table
+          rowKey={(record) => record.id}
+          columns={columns}
+          dataSource={transactionsData}
+          bordered
+        />
       </div>
     </>
   );
