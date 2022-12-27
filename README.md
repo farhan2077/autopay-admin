@@ -20,20 +20,26 @@
 git clone https://github.com/farhan2077/swiftpay-admin
 ```
 
-2. Install dependencies
+2. Move into the directory
+
+```sh
+cd swiftpay-admin
+```
+
+3. Install dependencies
 
 ```sh
 yarn
 ```
 
-3. Add environment vaariable(s)
+4. Add environment variable(s)
 
 ```sh
 REACT_APP_DEV_API_URL= # local backend api url (for local development)
 REACT_APP_PROD_API_URL= # deployed backend api url (for production)
 ```
 
-1. Run app
+5. Run app
 
 ```sh
 yarn start
