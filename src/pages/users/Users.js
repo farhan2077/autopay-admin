@@ -55,6 +55,7 @@ export default function Users() {
       dataIndex: "id",
       key: "id",
       ellipsis: true,
+      width: "150px",
       render: (id) => (
         <span
           onClick={() => {
@@ -70,30 +71,36 @@ export default function Users() {
       dataIndex: "name",
       key: "name",
       ellipsis: true,
+      width: "150px",
     },
     {
       title: "Address",
       dataIndex: "address",
       key: "address",
       ellipsis: true,
+      width: "170px",
     },
     {
       title: "Phone",
       dataIndex: "phone",
       key: "phone",
       ellipsis: true,
+      width: "150px",
     },
     {
       title: "Vehicle Type",
       dataIndex: "vehicleType",
       key: "vehicleType",
       ellipsis: true,
+      width: "150px",
     },
     {
       title: "Vehicle Id",
       dataIndex: "vehicleId",
       key: "vehicleId",
       ellipsis: true,
+      width: "150px",
+
       render: (vehicleId) => (
         <span
           onClick={() => {
@@ -109,6 +116,7 @@ export default function Users() {
       dataIndex: "tollRate",
       key: "tollRate",
       ellipsis: true,
+      width: "150px",
     },
     {
       title: "Action",
