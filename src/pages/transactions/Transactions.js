@@ -79,6 +79,7 @@ export default function Transactions() {
   return (
     <>
       <div>
+        {console.log(process.env.NODE_ENV)}
         <Table
           style={{
             marginBottom: "1.5rem",
