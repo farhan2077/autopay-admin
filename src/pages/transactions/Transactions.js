@@ -74,16 +74,6 @@ export default function Transactions() {
         }
       },
     },
-    // {
-    //   title: "Action",
-    //   key: "action",
-    //   render: (_, record) => (
-    //     <Space size="middle">
-    //       <p>Invite {record.name}</p>
-    //       <p>Delete</p>
-    //     </Space>
-    //   ),
-    // },
   ];
 
   return (

@@ -54,8 +54,7 @@ export default function Users() {
       title: "Id",
       dataIndex: "id",
       key: "id",
-      ellipsis: true,
-      width: "150px",
+      fixed: "left",
       render: (id) => (
         <span
           onClick={() => {
@@ -71,35 +70,32 @@ export default function Users() {
       dataIndex: "name",
       key: "name",
       ellipsis: true,
-      width: "150px",
     },
     {
       title: "Address",
       dataIndex: "address",
       key: "address",
       ellipsis: true,
-      width: "170px",
+      responsive: ["lg"],
     },
     {
       title: "Phone",
       dataIndex: "phone",
       key: "phone",
       ellipsis: true,
-      width: "150px",
+      responsive: ["lg"],
     },
     {
       title: "Vehicle Type",
       dataIndex: "vehicleType",
       key: "vehicleType",
       ellipsis: true,
-      width: "150px",
     },
     {
       title: "Vehicle Id",
       dataIndex: "vehicleId",
       key: "vehicleId",
       ellipsis: true,
-      width: "150px",
 
       render: (vehicleId) => (
         <span
@@ -116,11 +112,12 @@ export default function Users() {
       dataIndex: "tollRate",
       key: "tollRate",
       ellipsis: true,
-      width: "150px",
     },
     {
       title: "Action",
       key: "action",
+      width: "220px",
+      fixed: "right",
       render: (_, record) => (
         <Space size="middle">
           <Button
@@ -187,6 +184,9 @@ export default function Users() {
         pagination={{
           position: ["bottomCenter"],
           defaultCurrent: 1,
+        }}
+        scroll={{
+          x: 1200,
         }}
       />
     </div>
