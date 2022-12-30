@@ -1,7 +1,4 @@
-const baseUrl =
-  process.env.NOVE_ENV !== "production"
-    ? process.env.REACT_APP_DEV_API_URL
-    : process.env.REACT_APP_PROD_API_URL;
+const baseUrl = process.env.REACT_APP_API_URL;
 
 export const getTransactions = async () => {
   return fetch(`${baseUrl}/transactions`, {
