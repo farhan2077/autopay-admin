@@ -32,12 +32,7 @@ cd swiftpay-admin
 yarn
 ```
 
-4. Add environment variable(s)
-
-```sh
-REACT_APP_DEV_API_URL= # local backend api url (for local development)
-REACT_APP_PROD_API_URL= # deployed backend api url (for production)
-```
+4. Add environment variable **.env** file similar to [.env.example](https://github.com/farhan2077/swiftpay-admin/blob/master/.env.example)
 
 5. Run app
 
