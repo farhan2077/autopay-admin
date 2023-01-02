@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Table, Tag, Badge } from "antd";
+import { Table, Tag, Badge, Tooltip, message } from "antd";
 
 import { getTransactions } from "../../client/transactions.client";
+
+const copyIdSuccessful = () => {
+  message.success("Vehicle Id has been copied to the clipboard", 2);
+};
 
 export default function Transactions() {
   const [transactionsData, setTransactionsData] = useState([]);
@@ -19,6 +23,24 @@ export default function Transactions() {
   }, []);
 
   const columns = [
+    {
+      title: "Id",
+      dataIndex: "id",
+      key: "id",
+      fixed: "left",
+      ellipsis: true,
+      render: (id) => (
+        <Tooltip title="Click to copy id">
+          <span
+            onClick={() => {
+              navigator.clipboard.writeText(id).then(copyIdSuccessful());
+            }}
+          >
+            {id}
+          </span>
+        </Tooltip>
+      ),
+    },
     {
       title: "Name",
       dataIndex: "user",

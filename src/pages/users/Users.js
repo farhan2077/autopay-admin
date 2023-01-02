@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Space, Table, Button, message } from "antd";
+import { Space, Table, Button, message, Tooltip } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import pageStyle from "../pages.module.css";
 import { getUsers, deleteUser } from "../../client/users.client";
 import AddUserModal from "./AddUserModal";
 import EditUserModal from "./EditUserModal";
+
+const copyIdSuccessful = () => {
+  message.success("Vehicle Id has been copied to the clipboard", 2);
+};
 
 export default function Users() {
   const [usersData, setUsersData] = useState([]);
@@ -55,14 +59,17 @@ export default function Users() {
       dataIndex: "id",
       key: "id",
       fixed: "left",
+      ellipsis: true,
       render: (id) => (
-        <span
-          onClick={() => {
-            navigator.clipboard.writeText(id);
-          }}
-        >
-          {id}
-        </span>
+        <Tooltip title="Click to copy id">
+          <span
+            onClick={() => {
+              navigator.clipboard.writeText(id).then(copyIdSuccessful());
+            }}
+          >
+            {id}
+          </span>
+        </Tooltip>
       ),
     },
     {
