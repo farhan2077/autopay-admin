@@ -4,7 +4,7 @@ import { Table, Tag, Badge, Tooltip, message } from "antd";
 import { getTransactions } from "../../client/transactions.client";
 
 const copyIdSuccessful = () => {
-  message.success("Vehicle Id has been copied to the clipboard", 2);
+  message.success("Id has been copied to the clipboard", 2);
 };
 
 export default function Transactions() {

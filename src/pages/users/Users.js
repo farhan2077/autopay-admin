@@ -8,7 +8,7 @@ import AddUserModal from "./AddUserModal";
 import EditUserModal from "./EditUserModal";
 
 const copyIdSuccessful = () => {
-  message.success("Vehicle Id has been copied to the clipboard", 2);
+  message.success("Id has been copied to the clipboard", 2);
 };
 
 export default function Users() {
