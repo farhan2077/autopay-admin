@@ -72,8 +72,9 @@ export default function Transactions() {
           return (
             <span>
               {/* {createdAt} */}
-              time.substring(0, 11) + (parseInt(time.substring(11, 13)) +
-              6).toString() + time.substring(13)
+              {createdAt.substring(0, 11) +
+                (parseInt(createdAt.substring(11, 13)) + 6).toString() +
+                createdAt.substring(13)}
             </span>
           );
         }
