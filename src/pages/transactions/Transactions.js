@@ -64,7 +64,20 @@ export default function Transactions() {
     {
       title: "Transaction time",
       dataIndex: "createdAt",
-      key: "createdAt",
+      render: (createdAt) => {
+        {
+          let a = 6;
+        }
+        if (createdAt) {
+          return (
+            <span>
+              {/* {createdAt} */}
+              time.substring(0, 11) + (parseInt(time.substring(11, 13)) +
+              6).toString() + time.substring(13)
+            </span>
+          );
+        }
+      },
     },
     {
       title: "Payment status",
