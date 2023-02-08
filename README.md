@@ -1,6 +1,6 @@
 <h1 align="center">
 
-[SwiftPay](https://github.com/farhan2077/swiftpay) - Admin
+[SwiftToll](https://github.com/farhan2077/swifttoll) - Admin
 
 </h1>
 
@@ -17,13 +17,13 @@
 1. Download or clone the repository
 
 ```sh
-git clone https://github.com/farhan2077/swiftpay-admin
+git clone https://github.com/farhan2077/swifttoll-admin
 ```
 
 2. Move into the directory
 
 ```sh
-cd swiftpay-admin
+cd swifttoll-admin
 ```
 
 3. Install dependencies
@@ -32,7 +32,7 @@ cd swiftpay-admin
 yarn
 ```
 
-4. Add environment variable **.env** file similar to [.env.example](https://github.com/farhan2077/swiftpay-admin/blob/master/.env.example)
+4. Add environment variable **.env** file similar to [.env.example](https://github.com/farhan2077/swifttoll-admin/blob/master/.env.example)
 
 5. Run app
 

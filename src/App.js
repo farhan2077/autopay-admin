@@ -18,7 +18,7 @@ function App() {
       <Layout>
         <Header>
           {/* <div className="logo" /> */}
-          <p className={styles.headerText}>SwiftPay</p>
+          <p className={styles.headerText}>SwiftToll</p>
         </Header>
         <Layout>
           <Sider>
