@@ -60,6 +60,7 @@ export default function Users() {
       key: "id",
       fixed: "left",
       ellipsis: true,
+      width: "50px",
       render: (id) => (
         <Tooltip title="Click to copy id">
           <span
@@ -77,6 +78,7 @@ export default function Users() {
       dataIndex: "name",
       key: "name",
       ellipsis: true,
+      width: "60px",
     },
     {
       title: "Address",
@@ -84,6 +86,7 @@ export default function Users() {
       key: "address",
       ellipsis: true,
       responsive: ["lg"],
+      width: "45px",
     },
     {
       title: "Phone",
@@ -91,19 +94,21 @@ export default function Users() {
       key: "phone",
       ellipsis: true,
       responsive: ["lg"],
+      width: "60px",
     },
     {
       title: "Vehicle Type",
       dataIndex: "vehicleType",
       key: "vehicleType",
       ellipsis: true,
+      width: "50px",
     },
     {
       title: "Vehicle Id",
       dataIndex: "vehicleId",
       key: "vehicleId",
       ellipsis: true,
-
+      width: "60px",
       render: (vehicleId) => (
         <span
           onClick={() => {
@@ -119,11 +124,12 @@ export default function Users() {
       dataIndex: "tollRate",
       key: "tollRate",
       ellipsis: true,
+      width: "130px",
     },
     {
       title: "Action",
       key: "action",
-      width: "220px",
+      width: "110px",
       fixed: "right",
       render: (_, record) => (
         <Space size="middle">
